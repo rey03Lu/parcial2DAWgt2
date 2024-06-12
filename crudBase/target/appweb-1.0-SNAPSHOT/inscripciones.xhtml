@@ -5,45 +5,48 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>CRUD DE INSCRIPCIONES</title>
+        <title>INSCRIPCIONES</title>
     </h:head>
     <h:body>
-        <p:card style="margin: 5% 5% 0% 5%">
-            <h:form id="formInscripcion">
-                <p:panelGrid columns="12" layout="grid">
-                    <p:panelGrid columns="2" layout="grid">
-                        <!-- Botón para ir a alumno.xhtml -->
-                        <p:commandButton value="Alumnos" action="alumno.xhtml"/>
-                    </p:panelGrid>
-                    <p:panelGrid columns="2" layout="grid">
-                        <!-- Botón para ir a materia.xhtml -->
-                        <p:commandButton value="Materias" action="materia.xhtml" />
-                    </p:panelGrid>
-                    <p:panelGrid columns="2" layout="grid">
-                        <!-- Botón para ir a inscripciones.xhtml -->
-                        <p:commandButton value="Inscripciones" action="inscripciones.xhtml" />
-                    </p:panelGrid>
-                </p:panelGrid>
-            </h:form>
-
+        <p:card style="margin: 5% 5% 5% 5%">
             <f:facet name="title">
-                Formulario de Inscripciones
+                Inscripciones Web App
             </f:facet>
+            <p:card style="margin: 1% 1% 1% 1%">
+                <h:form id="formMenu">
+                    <p:panelGrid columns="3" layout="grid" >
+                        <p:panelGrid columns="4" layout="grid">
+                            <!-- Botón para ir a alumno.xhtml -->
+                            <p:commandButton style="width: 150px" value="Alumnos" action="alumno.xhtml"/>
+                        </p:panelGrid>
+                        <p:panelGrid columns="4" layout="grid">
+                            <!-- Botón para ir a materia.xhtml -->
+                            <p:commandButton style="width: 150px" value="Materias" action="materia.xhtml" />
+                        </p:panelGrid>
+                        <p:panelGrid columns="4" layout="grid">
+                            <!-- Botón para ir a inscripciones.xhtml -->
+                            <p:commandButton  style="width: 150px" value="Inscripciones" action="inscripciones.xhtml" />
+                        </p:panelGrid>
+                    </p:panelGrid>
+                </h:form>
+            </p:card>
             <f:view>
                 <h:form id="inscripcionForm">
                     <h:messages id="messages" globalOnly="true" layout="table"/>
                     <p:panelGrid columns="4" layout="grid">
+                        <p:column style="width: 30%">
                         <p:panelGrid columns="1" layout="grid">
                             <p:outputLabel for="alumno" value="Alumno:" />
-                            <p:selectOneMenu id="alumno" value="#{inscripcionController.inscripcion.alumno.id}" style="width:300px;">
+                            <p:selectOneMenu id="alumno" value="#{inscripcionController.inscripcion.alumno.id}" style="width:250px;">
                                 <f:selectItem itemLabel="Seleccione Alumno" itemValue="" noSelectionOption="true"/>
                                 <f:selectItems value="#{inscripcionController.alumnosList}" var="alumno" itemLabel="#{alumno.nombre}" itemValue="#{alumno.id}" />
                             </p:selectOneMenu>
                         </p:panelGrid>
-
+                        </p:column>
+                        <p:column style="width: 40%">
                         <p:panelGrid columns="1" layout="grid">
-                            <p:outputLabel for="materia" value="materia" />
-                            <p:selectOneMenu id="materia" value="#{inscripcionController.inscripcion.materia.id}" style="width:300px;">
+                            <p:outputLabel for="materia" value="Materia:" />
+                            <p:selectOneMenu id="materia" value="#{inscripcionController.inscripcion.materia.id}" style="width:340px;">
                                 <f:selectItem itemLabel="Seleccione Materia" itemValue="" noSelectionOption="true"/>
                                 <f:selectItems value="#{inscripcionController.materiasList}" var="materia"
                                                itemLabel="#{materia.nombre}" itemValue="#{materia.id}" />
@@ -55,24 +58,22 @@
                             </p:selectOneMenu>
                             -->
                         </p:panelGrid>
-
+                        </p:column>
+                        <p:column style="width: 15%">
                         <p:panelGrid columns="1" layout="grid">
-                            <p:outputLabel value="anio"/>
-                            <p:inputText id="anio" value="#{inscripcionController.inscripcion.anio}"/>
+                            <p:outputLabel value=" Año:"/>
+                            <p:inputText style="width: 100px" id="anio" value="#{inscripcionController.inscripcion.anio}"/>
                         </p:panelGrid>
+                        </p:column>
+                        <p:column style="width: 15%">
                         <p:panelGrid columns="1" layout="grid">
                             <p:outputLabel value="Ciclo:"/>
-                            <p:inputText id="ciclo" value="#{inscripcionController.inscripcion.ciclo}"/>
+                            <p:inputText style="width: 100px" id="ciclo" value="#{inscripcionController.inscripcion.ciclo}"/>
                         </p:panelGrid>
-
-                        <p:outputLabel for="fechaInscripcion" value="Fecha de Inscripción:" />
-                        <h:outputText id="fechaInscripcion" value="#{inscripcionController.inscripcion.fechaInscripcion}">
-                            <f:convertDateTime pattern="yyyy-MM-dd" />
-                             </h:outputText>
-
-                        <p:panelGrid columns="4" layout="grid">
-                            <p:commandButton value="Guardar" actionListener="#{inscripcionController.guardarInscripcion}" 
-                                             update="tablaInscripciones inscripcionForm messages"/>
+                        </p:column>
+                        <p:panelGrid columns="3" layout="grid" style="text-align: right">
+                            <p:commandButton value="Inscribir" actionListener="#{inscripcionController.guardarInscripcion}" 
+                                             update="tablaInscripciones inscripcionForm messages" style="width: 100px"/>
                         </p:panelGrid>
                     </p:panelGrid>
                 </h:form>
@@ -80,7 +81,7 @@
         </p:card>
 
         <p:card style="margin: 5% 5% 5% 5%">
-            <h1>Listado de Inscripciones</h1>
+            <h2>Listado de Inscripciones</h2>
             <h:form id="tablaInscripciones">
                 <p:dataTable id="inscripcionTable" var="inscripcion" value="#{inscripcionController.inscripcionesList}" 
                              widgetVar="inscripcionTable" styleClass="ui-datatable"
@@ -90,22 +91,22 @@
                              rowsPerPageTemplate="5,10,15">
 
                     <!-- Nueva columna para el ID de la inscripción -->
-                    <p:column headerText="ID Inscripción" >
+                    <p:column headerText="ID" style="width: 5%">
                         #{inscripcion.id}
                     </p:column>
-                    <p:column headerText="Alumno" >
+                    <p:column headerText="Alumno" style="width: 20%" >
                         #{inscripcion.alumno.nombre}
                     </p:column>
-                    <p:column headerText="Materia" >
+                    <p:column headerText="Materia" style="width: 40%">
                         #{inscripcion.materia.nombre}
                     </p:column>
-                    <p:column headerText="Ciclo" >
+                    <p:column headerText="Ciclo" style="width: 10%" >
                         #{inscripcion.ciclo}
                     </p:column>
-                    <p:column headerText="Año" >
+                    <p:column headerText="Año" style="width: 10%">
                         #{inscripcion.anio}
                     </p:column>
-                    <p:column headerText="Fecha de Inscripción" >
+                    <p:column headerText="Fecha de Inscripción" style="width: 15%">
                         <h:outputText value="#{inscripcion.fechaInscripcion}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>

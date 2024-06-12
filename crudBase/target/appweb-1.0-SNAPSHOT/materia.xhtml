@@ -5,53 +5,60 @@
       xmlns:f="jakarta.faces.core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>INSCRIPCION DE MATERIAS</title>
+        <title>MATERIAS</title>
     </h:head>
     <h:body>
         <p:card style="margin: 5% 5% 5% 5%">
-            <h:form id="formMateria">
-                <p:panelGrid columns="12" layout="grid">
-                    <p:panelGrid columns="2" layout="grid">
-                        <!-- Botón para ir a alumno.xhtml -->
-                        <p:commandButton value="Alumnos" action="alumno.xhtml"/>
-                    </p:panelGrid>
-                    <p:panelGrid columns="2" layout="grid">
-                        <!-- Botón para ir a materia.xhtml -->
-                        <p:commandButton value="Materias" action="materia.xhtml" />
-                    </p:panelGrid>
-                    <p:panelGrid columns="2" layout="grid">
-                        <!-- Botón para ir a inscripciones.xhtml -->
-                        <p:commandButton value="Inscripciones" action="inscripciones.xhtml" />
-                    </p:panelGrid>
-                </p:panelGrid>
-            </h:form>
             <f:facet name="title">
                 Formulario de Materias
             </f:facet>
+            <p:card style="margin: 1% 1% 1% 1%">
+                <h:form id="formMenu">
+                    <p:panelGrid columns="3" layout="grid" >
+                        <p:panelGrid columns="4" layout="grid">
+                            <!-- Botón para ir a alumno.xhtml -->
+                            <p:commandButton style="width: 150px" value="Alumnos" action="alumno.xhtml"/>
+                        </p:panelGrid>
+                        <p:panelGrid columns="4" layout="grid">
+                            <!-- Botón para ir a materia.xhtml -->
+                            <p:commandButton style="width: 150px" value="Materias" action="materia.xhtml" />
+                        </p:panelGrid>
+                        <p:panelGrid columns="4" layout="grid">
+                            <!-- Botón para ir a inscripciones.xhtml -->
+                            <p:commandButton  style="width: 150px" value="Inscripciones" action="inscripciones.xhtml" />
+                        </p:panelGrid>
+                    </p:panelGrid>
+                </h:form>
+            </p:card>
             <f:view>
                 <h:form id="materiaForm">
                     <h:inputHidden id="id" value="#{materiaController.materia.id}"/>
-                    <p:panelGrid columns="1" layout="grid">
-                        <p:outputLabel value="Nombre:"/>
-                        <p:inputText id="nombre" value="#{materiaController.materia.nombre}"/>
+                    <p:panelGrid columns="3" layout="grid">
+                        <p:panelGrid columns="1" layout="grid">
+                            <p:outputLabel value="Nombre:"/>
+                            <p:inputText style="width: 300px" id="nombre" value="#{materiaController.materia.nombre}"/>
+                        </p:panelGrid>
 
-                        <p:outputLabel value="Código:"/>
-                        <p:inputText id="codigo" value="#{materiaController.materia.codigo}"/>
+                        <p:panelGrid columns="1" layout="grid">
+                            <p:outputLabel value="Código:"/>
+                            <p:inputText style="width: 100px" id="codigo" value="#{materiaController.materia.codigo}"/>
+                        </p:panelGrid>
 
-                        <p:outputLabel value="Descripción:"/>
-                        <p:inputText id="descripcion" value="#{materiaController.materia.descripcion}"/>
+                        <p:panelGrid columns="1" layout="grid">
+                            <p:outputLabel value="Descripción:"/>
+                            <p:inputTextarea rows="2" cols="35" id="descripcion" value="#{materiaController.materia.descripcion}"/>
+                        </p:panelGrid>
                     </p:panelGrid>
 
-                    <p:panelGrid columns="4" layout="grid">
-                        <p:commandButton value="Guardar" actionListener = "#{materiaController.guardarMateria}" 
+                    <p:panelGrid columns="3" layout="grid">
+                        <p:commandButton style="width: 100px" value="Guardar" actionListener = "#{materiaController.guardarMateria}" 
                                          update="tablaMaterias materiaForm"/>
                     </p:panelGrid>
                 </h:form>
             </f:view>
         </p:card>
-
         <p:card style="margin: 5% 5% 5% 5%">
-            <h1>Listado de Materias</h1>
+            <h2>Listado de Materias</h2>
             <h:form id="tablaMaterias">
                 <p:dataTable rows="5" paginator="true" paginatorPosition="bottom" 
                              paginatorTemplate = "{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} 
@@ -59,23 +66,23 @@
                              currentPageReportTemplate = "{startRecord}-{endRecord} of {totalRecords} records"
                              rowsPerPageTemplate = "5,10,{ShowAll|'All'}"
                              value="#{materiaController.materiasList}" var="materia">
-                    <p:column>
+                    <p:column style="width: 5%">
                         <f:facet name="header">ID </f:facet>
                         <span> #{materia.id}</span>
                     </p:column>
-                    <p:column>
+                    <p:column style="width: 10%">
                         <f:facet name="header">Codigo </f:facet>
                         <span> #{materia.codigo}</span>
                     </p:column>
-                    <p:column>
+                    <p:column style="width: 20%">
                         <f:facet name="header">Nombre </f:facet>
                         <span> #{materia.nombre}</span>
                     </p:column>
-                    <p:column>
+                    <p:column style="width: 35%">
                         <f:facet name="header">Descripcion </f:facet>
                         <span> #{materia.descripcion}</span>
                     </p:column>
-                    <p:column>
+                    <p:column style="width: 30%">
                         <f:facet name="header">Opciones </f:facet>
                         <p:commandButton value="Editar" icon="pi pi-pencil" update="materiaForm"
                                          actionListener = "#{materiaController.llenarMateriaEditar(materia)}"/>
