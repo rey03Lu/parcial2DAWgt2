@@ -1,0 +1,12 @@
+com\reylulu\webapp\controladores\MateriaController.class
+com\reylulu\webapp\entidades\Alumno.class
+com\reylulu\webapp\resources\RecursoInscripcion.class
+com\reylulu\webapp\entidades\Inscripcion.class
+com\reylulu\webapp\resources\Recurso.class
+com\reylulu\webapp\resources\App.class
+com\reylulu\webapp\entidades\Materia.class
+com\reylulu\webapp\controladores\AlumnoController.class
+com\reylulu\webapp\controladores\IndexController.class
+com\reylulu\webapp\controladores\InscripcionController.class
+com\reylulu\webapp\negocio\DataService.class
+com\reylulu\webapp\resources\RecursoMateria.class
